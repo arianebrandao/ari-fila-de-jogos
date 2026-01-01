@@ -22,16 +22,8 @@ export interface TasksListProps {
 const HYGRAPH_API_URL =
   'https://us-west-2.cdn.hygraph.com/content/cmjub5i7901br07w5layxr978/master'
 
-const tasksDefault = [
-  {
-    id: 1,
-    content: 'Red Dead Redemption 2',
-    isChecked: false,
-  },
-]
-
 export function App() {
-  const [taskList, setTaskList] = useState<TaskProps[]>(tasksDefault)
+  const [taskList, setTaskList] = useState<TaskProps[]>([])
   const [newTaskText, setNewTaskText] = useState('')
   const [totalOfTasks, setTotalOfTasks] = useState(0)
 
@@ -111,6 +103,13 @@ export function App() {
       <div className="bg-gray-700 mx-auto">
         <div className="flex flex-col items-center justify-center pt-20">
           <Logo />
+
+          <div className="text-white text-sm w-[736px] max-w-full mt-6 text-center px-2">
+            Os dados são carregados à partir de um headless CMS, você pode mexer
+            à vontade para testar as funcionalidades, mas suas alterações não
+            serão salvas.
+          </div>
+          
           <form
             onSubmit={createNewTask}
             className="mt-14 -mb-7 w-[736px] max-w-full flex gap-x-2 px-2"
