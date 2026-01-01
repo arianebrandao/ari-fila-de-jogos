@@ -31,7 +31,7 @@ Também utilizei o Hygraph como Headless CMS para armazenar os dados dos jogos.
 
 ## App online para testar
 
-App online: [https://ari-fila-jogos.pages.dev/](https://ari-fila-jogos.pages.dev/).
+App online: [https://ari-fila-de-jogos.vercel.app/](https://ari-fila-de-jogos.vercel.app/).
 
 ## Layout
 
