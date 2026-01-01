@@ -10,7 +10,7 @@
 
 ## 🚀 Ari - Fila de jogos
 
-Aplicação de controle de jogos na minha fila para jogar no estilo **to do list**, que contém as seguintes funcionalidades:
+Aplicação para controle de jogos que estão na minha fila para jogar, feito no estilo **to do list**, que contém as seguintes funcionalidades:
 
 - Adicionar um novo jogo
 - Marcar e desmarcar um jogo como concluído
@@ -26,6 +26,8 @@ Essa é uma aplicação React utilizando TypeScript, Vite e Tailwind CSS para ap
 - Listas e chaves no ReactJS
 - Propriedades
 - Componentização
+
+Também utilizei o Hygraph como Headless CMS para armazenar os dados dos jogos.
 
 ## App online para testar
 

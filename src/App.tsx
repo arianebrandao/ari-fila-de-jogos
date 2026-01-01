@@ -1,3 +1,5 @@
+import { request } from 'graphql-request'
+
 import { FormEvent, useState, ChangeEvent, useEffect, MouseEvent } from 'react'
 import { EmptyTasksList } from './components/EmptyTasksList'
 import { Input } from './components/Input'
@@ -17,11 +19,13 @@ export interface TasksListProps {
   task: TaskProps
 }
 
+const HYGRAPH_API_URL =
+  'https://us-west-2.cdn.hygraph.com/content/cmjub5i7901br07w5layxr978/master'
+
 const tasksDefault = [
   {
     id: 1,
-    content:
-      'Internacionalização: adicionar suporte para outros idiomas no app',
+    content: 'Red Dead Redemption 2',
     isChecked: false,
   },
 ]
@@ -30,6 +34,26 @@ export function App() {
   const [taskList, setTaskList] = useState<TaskProps[]>(tasksDefault)
   const [newTaskText, setNewTaskText] = useState('')
   const [totalOfTasks, setTotalOfTasks] = useState(0)
+
+  useEffect(() => {
+    const fetchTasksFromCMS = async () => {
+      const { listaJogos } = await request(
+        HYGRAPH_API_URL,
+        `
+      {
+        listaJogos {
+          id
+          content
+          isChecked
+        }
+      }
+    `
+      )
+      setTaskList(listaJogos)
+    }
+
+    fetchTasksFromCMS()
+  }, [])
 
   useEffect(() => {
     setTotalOfTasks(() => taskList.length)
@@ -115,6 +139,7 @@ export function App() {
                 >
                   <div className="inline-flex gap-3">
                     <Checkbox
+                      defaultChecked={task.isChecked}
                       onClick={(event) =>
                         handleTaskToggle(
                           event as MouseEvent<HTMLInputElement>,
