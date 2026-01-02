@@ -33,7 +33,7 @@ export function App() {
         HYGRAPH_API_URL,
         `
       {
-        listaJogos {
+        listaJogos(first: 100) {
           id
           content
           isChecked
