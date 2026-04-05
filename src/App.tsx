@@ -39,7 +39,7 @@ export function App() {
           isChecked
         }
       }
-    `
+    `,
       )
       setTaskList(listaJogos)
     }
@@ -52,14 +52,24 @@ export function App() {
   }, [taskList])
 
   function handleNewTaskText(event: ChangeEvent<HTMLInputElement>) {
-    setNewTaskText(event.target.value)
+    if (event.target.value.length > 0) {
+      setNewTaskText(event.target.value)
+    }
+  }
+
+  function updateAndSortTasks(newList: TaskProps[]) {
+    const sorted = newList.sort((a, b) => {
+      if (a.isChecked === b.isChecked) return 0
+      return a.isChecked ? 1 : -1
+    })
+    setTaskList(sorted)
   }
 
   function createNewTask(event: FormEvent | Event) {
     event.preventDefault()
 
     const newTaskId = taskList.length + 1
-    setTaskList([
+    updateAndSortTasks([
       {
         id: newTaskId,
         content: newTaskText,
@@ -72,7 +82,7 @@ export function App() {
 
   function handleTaskToggle(
     event: MouseEvent<HTMLInputElement>,
-    taskId: number
+    taskId: number,
   ) {
     const isChecked = event.currentTarget.checked
     const updatedTaskListWithTaskChecked = taskList.map((task) => {
@@ -81,7 +91,7 @@ export function App() {
       }
       return task
     })
-    setTaskList(updatedTaskListWithTaskChecked)
+    updateAndSortTasks(updatedTaskListWithTaskChecked)
   }
 
   const checkedTasksCounter = taskList.reduce((prevValue, currentTask) => {
@@ -93,9 +103,9 @@ export function App() {
 
   function handleDeleteTask(taskId: number) {
     const updatedTaskListWithDeletedTask = taskList.filter(
-      (task) => task.id !== taskId
+      (task) => task.id !== taskId,
     )
-    setTaskList(updatedTaskListWithDeletedTask)
+    updateAndSortTasks(updatedTaskListWithDeletedTask)
   }
 
   return (
@@ -109,7 +119,7 @@ export function App() {
             à vontade para testar as funcionalidades, mas suas alterações não
             serão salvas.
           </div>
-          
+
           <form
             onSubmit={createNewTask}
             className="mt-14 -mb-7 w-[736px] max-w-full flex gap-x-2 px-2"
@@ -142,7 +152,7 @@ export function App() {
                       onClick={(event) =>
                         handleTaskToggle(
                           event as MouseEvent<HTMLInputElement>,
-                          task.id
+                          task.id,
                         )
                       }
                     />
