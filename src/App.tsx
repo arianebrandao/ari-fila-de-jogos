@@ -41,7 +41,7 @@ export function App() {
       }
     `,
       )
-      setTaskList(listaJogos)
+      updateAndSortTasks(listaJogos)
     }
 
     fetchTasksFromCMS()
